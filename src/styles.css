@@ -1,12 +1,19 @@
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
-  background: #181a1b;
   color: #f3f3f3;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("assets/backgrounds/1.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center top;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  height: 100vh;
 }
 header {
-  background: #2d2f31;
-  padding: 2rem 0 1rem 0;
+  background: #2d2f31f0;
+  padding: .5rem 0 .5rem 0;
   text-align: center;
 }
 header h1 {
@@ -24,6 +31,10 @@ header p {
   max-width: 900px;
   margin: 2rem auto;
   padding: 0 1rem;
+  background-color: #505050a0;
+  padding: 1.5rem;
+  padding-top: 0.5rem;
+  border-radius: 10px;
 }
 .features {
   display: flex;
@@ -34,9 +45,9 @@ header p {
 .feature {
   background: #232526;
   border-radius: 10px;
-  padding: 1.5rem;
-  flex: 1 1 250px;
-  min-width: 220px;
+  padding: 1rem 1.5rem 0 1.5rem;
+  flex: 1 1 12.5vw;
+  min-width: 10vw;
   box-shadow: 0 2px 8px #0002;
 }
 .feature h3 {

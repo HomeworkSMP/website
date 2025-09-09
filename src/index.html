@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomeworkSMP - Minecraft Server</title>
+    <title>HomeworkSMP</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>HomeworkSMP</h1>
-        <p>The ultimate Minecraft SMP experience for everyone</p>
+        <h1 style="display: inline;">HomeworkSMP</h1> <p style="display: inline;">The ultimate Minecraft SMP experience for everyone</p>
     </header>
     <div class="container">
         <section>
@@ -49,5 +48,16 @@
     <footer>
         &copy; 2025 HomeworkSMP &mdash; Not affiliated with Mojang or Microsoft.
     </footer>
+
+    <script>
+        var randomImage = Math.floor(Math.random() * 64) + 1;
+        document.body.style.backgroundImage = `url(assets/backgrounds/${randomImage}.png)`;
+
+        setInterval(() => {
+            randomImage = Math.floor(Math.random() * 64) + 1
+
+            document.body.style.backgroundImage = `url(assets/backgrounds/${randomImage}.png)`;
+        }, 5000);
+    </script>
 </body>
 </html>
