@@ -50,14 +50,12 @@
     </footer>
 
     <script>
-        var randomImage = Math.floor(Math.random() * 64) + 1;
-        document.body.style.backgroundImage = `url(assets/backgrounds/${randomImage}.png)`;
-
-        setInterval(() => {
-            randomImage = Math.floor(Math.random() * 64) + 1
-
-            document.body.style.backgroundImage = `url(assets/backgrounds/${randomImage}.png)`;
-        }, 5000);
+        function setRandomBackground() {
+            var randomImage = Math.floor(Math.random() * 64) + 1;
+            document.body.style.backgroundImage = `url(../backgrounds/${randomImage}.png)`;
+        }
+        setRandomBackground();
+        setInterval(setRandomBackground, 5000);
     </script>
 </body>
 </html>
