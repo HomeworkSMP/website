@@ -11,6 +11,7 @@
 <body>
     <header>
         <h1 style="display: inline;">HomeworkSMP</h1>
+        <br>
         <p style="display: inline;">The ultimate Minecraft SMP experience for everyone</p>
     </header>
     <div class="container">
@@ -60,7 +61,7 @@
     <script>
         function setRandomBackground() {
             var randomImage = Math.floor(Math.random() * 64) + 1;
-            document.body.style.backgroundImage = `url(../backgrounds/${randomImage}.png)`;
+            document.body.style.backgroundImage = `url(./assets/backgrounds/${randomImage}.png)`;
         }
         setRandomBackground();
         setInterval(setRandomBackground, 5000);
