@@ -60,9 +60,26 @@
 
     <script>
         function setRandomBackground() {
-            var randomImage = Math.floor(Math.random() * 64) + 1;
-            document.body.style.backgroundImage = `url(./assets/backgrounds/${randomImage}.png)`;
+            const randomImage = Math.floor(Math.random() * 64) + 1;
+            const body = document.body;
+
+            // Add the fade class to trigger the fade-out effect
+            body.classList.add('fade');
+
+            // Wait for the fade-out transition to complete
+            setTimeout(() => {
+                // Update the background image in the ::before pseudo-element
+                document.documentElement.style.setProperty(
+                    '--background-image',
+                    `url('./assets/backgrounds/${randomImage}.png')`
+                );
+
+                // Remove the fade class to trigger the fade-in effect
+                body.classList.remove('fade');
+            }, 1000); // Match the transition duration in CSS
         }
+
+        // Set the initial background and start the interval
         setRandomBackground();
         setInterval(setRandomBackground, 5000);
     </script>
