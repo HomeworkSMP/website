@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomeworkSMP - Minecraft Server</title>
+    <title>HomeworkSMP</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
-        <h1>HomeworkSMP</h1>
-        <p>The ultimate Minecraft SMP experience for everyone</p>
+        <h1 style="display: inline;">HomeworkSMP</h1>
+        <p style="display: inline;">The ultimate Minecraft SMP experience for everyone</p>
     </header>
     <div class="container">
         <section>
             <h2>About Our Server</h2>
             <p>
-                Welcome to <strong>HomeworkSMP</strong>! We're a friendly, community-driven Minecraft Survival Multiplayer server where you can relax, build, and play with friends after a long day of schoolwork. Whether you're a builder, explorer, or redstone engineer, you'll find your place here!
+                Welcome to <strong>HomeworkSMP</strong>! We're a friendly, community-driven Minecraft Survival
+                Multiplayer server where you can relax, build, and play with friends after a long day of schoolwork.
+                Whether you're a builder, explorer, or redstone engineer, you'll find your place here!
             </p>
         </section>
         <section class="features">
@@ -29,11 +33,13 @@
             </div>
             <div class="feature">
                 <h3>🔒 Safe & Friendly</h3>
-                <p>This multiplayer server is a safe, respectful environment for everyone. Griefing and toxicity are not tolerated.</p>
+                <p>This multiplayer server is a safe, respectful environment for everyone. Griefing and toxicity are not
+                    tolerated.</p>
             </div>
             <div class="feature">
                 <h3>🎒 Beginner-Friendly</h3>
-                <p>First time playing Minecraft can be quiet troublesome. But with some quality-of-life tweaks, your gaming experience will be much more fun</p>
+                <p>First time playing Minecraft can be quiet troublesome. But with some quality-of-life tweaks, your
+                    gaming experience will be much more fun</p>
             </div>
         </section>
         <section class="join-section">
@@ -42,12 +48,22 @@
             <p>
                 Version: <strong>1.20.x</strong><br>
                 Need help joining? <a href="mailto:admin@homeworksmp.com" style="color:#7ed957;">Contact us</a><br>
-                Join us on Discord: <a href="https://discord.gg/homeworksmp" style="color:#7ed957;">discord.gg/homeworksmp</a>
+                Join us on Discord: <a href="https://discord.homeworksmp.gay"
+                    style="color:#7ed957;">discord.gg/homeworksmp</a>
             </p>
         </section>
     </div>
     <footer>
         &copy; 2025 HomeworkSMP &mdash; Not affiliated with Mojang or Microsoft.
     </footer>
+
+    <script>
+        function setRandomBackground() {
+            var randomImage = Math.floor(Math.random() * 64) + 1;
+            document.body.style.backgroundImage = `url(../backgrounds/${randomImage}.png)`;
+        }
+        setRandomBackground();
+        setInterval(setRandomBackground, 5000);
+    </script>
 </body>
 </html>
