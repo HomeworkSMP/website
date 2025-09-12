@@ -2,15 +2,12 @@ body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
     color: #f3f3f3;
-    background-color: #232526; /* Fallback background color */
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center top;
-    background-size: cover;
+    background-color: #232526;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
     position: relative;
     z-index: 1;
+    min-height: 100vh;
 }
 
 body::before {
@@ -20,16 +17,41 @@ body::before {
     z-index: -1;
     pointer-events: none;
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    background-image: var(--background-image, url('./assets/backgrounds/1.png')); /* Default background */
+    background-image: var(--background-image, url('./assets/backgrounds/1.png'));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     transition: opacity 1s ease-in-out; /* Fade-in effect */
     opacity: 1;
 }
 
-body.fade::before {
-    opacity: 0; /* Trigger fade-out */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+body::before {
+    background-image: var(--background-image-current, url('./assets/backgrounds/1.png'));
+}
+
+body::after {
+    background-image: var(--background-image-next, url('./assets/backgrounds/1.png'));
+    opacity: 0;
+}
+
+body.crossfade-active::after {
+    opacity: 1;
 }
 
 header {
@@ -104,7 +126,7 @@ header p {
 
 footer {
     text-align: center;
-    color: #888;
+    color: #f3f3f3;
     padding: 1.5rem 0 1rem 0;
     font-size: 0.95rem;
 }

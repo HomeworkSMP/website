@@ -59,29 +59,30 @@
     </footer>
 
     <script>
-        function setRandomBackground() {
-            const randomImage = Math.floor(Math.random() * 64) + 1;
-            const body = document.body;
+        let currentImage = Math.floor(Math.random() * 64) + 1;
+        let nextImage = currentImage;
+        const body = document.body;
 
-            // Add the fade class to trigger the fade-out effect
-            body.classList.add('fade');
+        function setInitialBackground() {
+            body.style.setProperty('--background-image-current', `url('./assets/backgrounds/${currentImage}.png')`);
+            body.style.setProperty('--background-image-next', `url('./assets/backgrounds/${currentImage}.png')`);
+        }
 
-            // Wait for the fade-out transition to complete
+        function crossfadeBackground() {
+            nextImage = Math.floor(Math.random() * 64) + 1;
+            // Set next image
+            body.style.setProperty('--background-image-next', `url('./assets/backgrounds/${nextImage}.png')`);
+            // Start crossfade
+            body.classList.add('crossfade-active');
+            // After fade duration, swap images
             setTimeout(() => {
-                // Update the background image in the ::before pseudo-element
-                document.documentElement.style.setProperty(
-                    '--background-image',
-                    `url('./assets/backgrounds/${randomImage}.png')`
-                );
-
-                // Remove the fade class to trigger the fade-in effect
-                body.classList.remove('fade');
+                body.style.setProperty('--background-image-current', `url('./assets/backgrounds/${nextImage}.png')`);
+                body.classList.remove('crossfade-active');
             }, 1000); // Match the transition duration in CSS
         }
 
-        // Set the initial background and start the interval
-        setRandomBackground();
-        setInterval(setRandomBackground, 5000);
+        setInitialBackground();
+        setInterval(crossfadeBackground, 5000);
     </script>
 </body>
 </html>
