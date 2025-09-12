@@ -13,24 +13,24 @@ body {
     z-index: 1;
 }
 
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-        background-image: var(--background-image, url('./assets/backgrounds/1.png')); /* Default background */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        transition: opacity 1s ease-in-out; /* Fade-in effect */
-        opacity: 1;
-    }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-image: var(--background-image, url('./assets/backgrounds/1.png')); /* Default background */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 1s ease-in-out; /* Fade-in effect */
+    opacity: 1;
+}
 
-    body.fade::before {
-        opacity: 0; /* Trigger fade-out */
-    }
+body.fade::before {
+    opacity: 0; /* Trigger fade-out */
+}
 
 header {
     background: #2d2f31f0;
@@ -38,18 +38,18 @@ header {
     text-align: center;
 }
 
-    header h1 {
-        font-size: 2.5rem;
-        margin: 0;
-        color: #7ed957;
-        letter-spacing: 2px;
-    }
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #7ed957;
+    letter-spacing: 2px;
+}
 
-    header p {
-        font-size: 1.2rem;
-        color: #bdbdbd;
-        margin-top: 0.5rem;
-    }
+header p {
+    font-size: 1.2rem;
+    color: #bdbdbd;
+    margin-top: 0.5rem;
+}
 
 .container {
     max-width: 900px;
@@ -77,10 +77,10 @@ header {
     box-shadow: 0 2px 8px #0002;
 }
 
-    .feature h3 {
-        color: #7ed957;
-        margin-top: 0;
-    }
+.feature h3 {
+    color: #7ed957;
+    margin-top: 0;
+}
 
 .join-section {
     background: #232526;
