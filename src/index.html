@@ -10,47 +10,51 @@
 
 <body>
     <header>
-        <h1 style="display: inline;">HomeworkSMP</h1>
-        <br>
-        <p style="display: inline;">The ultimate Minecraft SMP experience for everyone</p>
+        <h1>HomeworkSMP</h1>
+        <p style="display:inline">The ultimate Minecraft SMP experience for everyone</p>
+        <nav class="quick-links">
+            <button class="quick-links-toggle" aria-haspopup="true" aria-expanded="false">Quick Links ▼</button>
+            <ul class="quick-links-menu">
+                <li><a href="https://media.homeworksmp.gay/Constitution.pdf">Our Constitution</a></li>
+                <li><a href="https://github.com/HomeworkSMP">HWSMP Github</a></li>
+                <li><a href="https://discord.homeworksmp.gay">Discord Server</a></li>
+                <li><a href="mailto:admin@homeworksmp.gay">Contact</a></li>
+            </ul>
+        </nav>
     </header>
     <div class="container">
         <section>
             <h2>About Our Server</h2>
             <p>
-                Welcome to <strong>HomeworkSMP</strong>! We're a friendly, community-driven Minecraft Survival
-                Multiplayer server where you can relax, build, and play with friends after a long day of schoolwork.
-                Whether you're a builder, explorer, or redstone engineer, you'll find your place here!
+                Welcome to <strong>HomeworkSMP</strong>! We're a friendly, community-driven Minecraft Survival Multiplayer server where you can relax, build, and play with friends after a long day of schoolwork. Whether you're a builder, explorer, or redstone engineer, you'll find your place here!
             </p>
         </section>
         <section class="features">
             <div class="feature">
-                <h3>🌎 Survival World</h3>
-                <p>Enjoy a classic survival experience with a welcoming community.</p>
+                <h3>🌍 Community Survival</h3>
+                <p>Build, explore, and survive in a shared world where creativity and collaboration shape the server. Every player leaves their mark.</p>
             </div>
             <div class="feature">
-                <h3>👫 Community Events</h3>
-                <p>Participate in regular events, competitions, and group builds. Make new friends and memories!</p>
+                <h3>🎮 Player-Driven World</h3>
+                <p>HomeworkSMP grows with its community. From massive builds to shared projects and spontaneous events, the server evolves with the people who play on it.</p>
             </div>
             <div class="feature">
-                <h3>🔒 Safe & Friendly</h3>
-                <p>This multiplayer server is a safe, respectful environment for everyone. Griefing and toxicity are not
-                    tolerated.</p>
+                <h3>⚔️ Roleplay & Conflict</h3>
+                <p>Wars, alliances, disputes. Build nations, form friendships, and settle conflicts.</p>
             </div>
             <div class="feature">
-                <h3>🎒 Beginner-Friendly</h3>
-                <p>First time playing Minecraft can be quiet troublesome. But with some quality-of-life tweaks, your
-                    gaming experience will be much more fun</p>
+                <h3>🛠️ Quality-of-Life Tweaks</h3>
+                <p>Vanilla at heart, but enhanced with light tweaks (like elevators and timber) to make gameplay smoother while keeping the Minecraft spirit intact.</p>
             </div>
         </section>
         <section class="join-section">
             <h2>Join HomeworkSMP Today!</h2>
-            <div class="ip">IP: <strong>play.homeworksmp.gay</strong></div>
+            <div class="ip">IP: <b><a href="https://discord.homeworksmp.gay" class="ipLink">play.homeworksmp.gay</a></b></div>
             <p>
-                Version: <strong>1.20.x</strong><br>
-                Need help joining? <a href="mailto:admin@homeworksmp.com" style="color:#7ed957;">Contact us</a><br>
+                Version: <b>1.21.8</b>, compatible with 1.7.x - 1.21.x<br>
+                Need help joining? <a href="mailto:admin@homeworksmp.gay" style="color:#7ed957;">Contact us</a><br>
                 Join us on Discord: <a href="https://discord.homeworksmp.gay"
-                    style="color:#7ed957;">discord.gg/homeworksmp</a>
+                    style="color:#7ed957;">discord.homeworksmp.gay</a>
             </p>
         </section>
     </div>
@@ -59,6 +63,22 @@
     </footer>
 
     <script>
+        // Dropdown quick links toggle
+        const quickLinksToggle = document.querySelector('.quick-links-toggle');
+        const quickLinksMenu = document.querySelector('.quick-links-menu');
+        if (quickLinksToggle && quickLinksMenu) {
+            quickLinksToggle.addEventListener('click', function() {
+                const expanded = quickLinksToggle.getAttribute('aria-expanded') === 'true';
+                quickLinksToggle.setAttribute('aria-expanded', !expanded);
+                quickLinksMenu.classList.toggle('show');
+            });
+            document.addEventListener('click', function(e) {
+                if (!quickLinksToggle.contains(e.target) && !quickLinksMenu.contains(e.target)) {
+                    quickLinksMenu.classList.remove('show');
+                    quickLinksToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
         let currentImage = Math.floor(Math.random() * 64) + 1;
         let nextImage = currentImage;
         const body = document.body;
