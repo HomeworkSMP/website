@@ -73,6 +73,86 @@ header p {
     margin-top: 0.5rem;
 }
 
+.quick-links {
+    position: absolute;
+    top: 1.2rem;
+    right: 2rem;
+    z-index: 10;
+}
+
+.quick-links-toggle {
+    background: #2d2f31f0;
+    color: #7ed957;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.quick-links-toggle:hover,
+.quick-links-toggle:focus {
+    background: #2d2f31;
+}
+
+.quick-links-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 2.5rem;
+    background: #2d2f31f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0004;
+    min-width: 160px;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+}
+
+.quick-links-menu.show {
+    display: block;
+}
+
+.quick-links-menu li {
+    width: 100%;
+}
+
+.quick-links-menu a {
+    display: block;
+    color: #f3f3f3;
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.quick-links-menu a:hover,
+.quick-links-menu a:focus {
+    background: #7ed95722;
+    color: #7ed957;
+}
+
+@media (max-width: 700px) {
+    .quick-links {
+        position: static;
+        display: block;
+        margin-top: 0.5rem;
+        text-align: left;
+    }
+
+    .quick-links-menu {
+        position: static;
+        box-shadow: none;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .quick-links-toggle {
+        width: 100%;
+        text-align: left;
+    }
+}
+
 .container {
     max-width: 900px;
     margin: 2rem auto;
@@ -122,6 +202,11 @@ header p {
     display: inline-block;
     margin: 1rem 0;
     letter-spacing: 1px;
+}
+
+.ipLink:visited, 
+.ipLink:link {
+    color: #7ed957;
 }
 
 footer {
