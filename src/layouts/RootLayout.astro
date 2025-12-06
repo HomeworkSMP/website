@@ -12,13 +12,42 @@ import "../styles/global.css";
         <title>{title}</title>
     </head>
 
-    <body class="min-h-screen flex flex-col font-sans" style="background-image: url('/1.png'); background-size: cover; background-position: center;">
+    <body class="min-h-screen flex flex-col font-sans relative">
+        <div id="bg1" class="bg-layer"></div>
+        <div id="bg2" class="bg-layer opacity-0"></div>
+
         <Navbar />
 
-        <main class="flex-1 px-6 md:px-12 lg:px-20 py-12">
+        <main class="relative z-10 flex-1 px-6 md:px-12 lg:px-20 py-12">
             <slot />
         </main>
 
         <Footer />
+
+        <script>
+            let index = Math.floor(Math.random() * 64) + 1;
+            let showingBg1 = true;
+
+            const bg1 = document.getElementById("bg1");
+            const bg2 = document.getElementById("bg2");
+
+            // Initial image
+            bg1.style.backgroundImage = `url("/background/${index}.png")`;
+            setInterval(() => {
+                index = Math.floor(Math.random() * 64) + 1;
+
+                if (showingBg1) {
+                    bg2.style.backgroundImage = `url("/background/${index}.png")`;
+                    bg2.classList.remove("opacity-0");
+                    bg1.classList.add("opacity-0");
+                } else {
+                    bg1.style.backgroundImage = `url("/background/${index}.png")`;
+                    bg1.classList.remove("opacity-0");
+                    bg2.classList.add("opacity-0");
+                }
+
+                showingBg1 = !showingBg1;
+            }, 5000);
+        </script>
     </body>
 </html>

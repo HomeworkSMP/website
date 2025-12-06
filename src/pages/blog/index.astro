@@ -1,0 +1,37 @@
+---
+import RootLayout from "../../layouts/RootLayout.astro";
+
+const posts = await Astro.glob("./*.mdx");
+
+posts.sort(
+    (a, b) =>
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime(),
+);
+---
+
+<RootLayout title="Blog">
+    <div class="bg-zinc-600/80 max-w-5xl mx-auto p-8 rounded-xl">
+        <section class="max-w-4xl mx-auto text-neutral-100">
+            <h2 class="text-3xl font-semibold mb-2">HomeworkSMP Blog</h2>
+            <p class="text-neutral-400 mb-4">
+                Welcome to the HomeworkSMP blog, where we share the latest news,
+                updates, and stories from our Minecraft SMP community. Our blogs
+                can be written by any of our members.
+            </p>
+
+            <ul class="space-y-4">
+                {
+                    posts.map((post) => (
+                        <li class="border border-neutral-800 p-4 rounded hover:border-lime-400 transition bg-neutral-800">
+                            <a href={post.url} class="flex justify-between items-center">
+                                <span class="font-semibold text-neutral-100 hover:text-lime-400">{post.frontmatter.title} • {post.frontmatter.author}</span>
+                                <span class="text-neutral-500 text-sm">{post.frontmatter.date}</span>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </section>
+    </div>
+</RootLayout>
