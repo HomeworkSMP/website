@@ -16,9 +16,7 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
             }
 
             <header class="space-y-2">
-                <h1 class="text-4xl md:text-5xl font-bold text-lime-400">
-                    {title}
-                </h1>
+                <h1 class="text-4xl md:text-5xl font-bold text-lime-400">{title}</h1>
 
                 <div class="flex flex-wrap items-center gap-2 text-neutral-400 text-sm">
                     <span>by {author} • {date} • {readingTime} min read</span>
@@ -29,14 +27,8 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
                 <slot />
             </section>
 
-            <!-- Back link -->
             <div class="mt-8">
-                <a
-                    href="/blog"
-                    class="text-lime-400 hover:text-lime-300 font-medium"
-                >
-                    ← Back to Blog
-                </a>
+                <a href="/blog" class="text-lime-400 hover:text-lime-300 font-medium">← Back to Blog</a>
             </div>
         </article>
     </div>
