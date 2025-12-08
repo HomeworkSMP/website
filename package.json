@@ -1,7 +1,7 @@
 {
-  "name": "celestial-chasm",
+  "name": "homeworksmp-website",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -16,5 +16,17 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19"
-  }
+  },
+  "description": "Welcome to the HomeworkSMP website! HomeworkSMP is a Minecraft SMP server dedicated to providing a fun and engaging multiplayer experience. This website serves as a hub for information, updates, and community engagement related to the server.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HomeworkSMP/website.git"
+  },
+  "author": "HomeworkSMP Members",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/HomeworkSMP/website/issues"
+  },
+  "homepage": "https://github.com/HomeworkSMP/website#readme"
 }
