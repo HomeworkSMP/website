@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 1s ease-in-out;
+    z-index: -10000;
+}
