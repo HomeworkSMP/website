@@ -26,6 +26,18 @@ This issue persisted throughout the morning into the afternoon on the 28th, beco
 
 ![](/blog/20251230-outagereport/Screenshot2026-01-04171053.png)
 
-## The Outage
+## The Outage on December 28th
 
-Officially, the outage began at 16:21, however, it is estimated that the server was unreachable at least 2 hours or more before the server was officially declared offline. Player GrandmasterMud was seen attempting to join the server at 13:10 but met with error message “Failed to verify username!”, however they were seen playing on the server between 11:37 and 12:00.
+Officially, the outage began at 16:21 on December 28th, however, logs show that the server was intermittently unavailable since 11:29. Player GrandmasterMud was seen attempting to join the server at 13:10 but met with error message “Failed to verify username!”, however they were seen playing on the server between 11:37 and 12:00.
+
+The server under intermittent outage for around one hour before going into full outage/maintenance at 15:17. This outage lasted until 00:04, where the server was once again under intermittent outage until 01:02.
+
+The server displayed behaviors of reduced performance after the server was brought back online, where the MSPT of the server was double or more than usual, and TPS dropped below 19.9. We will explain the server behavior as we go, but the server MSPT and TPS did not recover until January 1st, 2026 at 16:33.
+
+## What went wrong and How we approached it (Outage 1)
+
+The pre-existing infrastructure used to host the server actually used Windows as it's operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
+
+The cause of this outage was mostly due to a random bug/glitch in Windows Firewall, where it filtered and blocked most activities. This was also an issue that we experienced when we were attempting to reach the server as the server was headless and required RDP to conduct most activities. 
+
+Luckily, thanks to pre-existing setup, we were able to use Tailscale to 
