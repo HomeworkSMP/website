@@ -16,8 +16,8 @@ We welcome and appreciate contributions to improve the HomeworkSMP website! Here
 
 ### Fork and Pull Requests
 
-1. Fork this repository to your GitHub account.
-2. Make your changes in a new branch or directly within the repository (if you're a HomeworkSMP member).
+1. Fork this repository to your GitHub account (HomeworkSMP Members may create a new branch instead).
+2. Make your changes in the new branch/fork.
 3. Submit a pull request (PR) with a clear description of your changes.
 
 Our deployment service, Cloudflare Pages, will automatically generate a preview of your changes for review.
