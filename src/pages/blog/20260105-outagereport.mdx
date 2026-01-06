@@ -20,17 +20,16 @@ I would like to apologize for this outage, as this is an issue that could’ve b
 ## The Beginning
 
 Issues began occurring in the morning hours of December 28th, when players began encountering issues connecting to the server. Some players reported difficulty joining the server, with error messages such as “Network is unreachable”, “Connection timed out: getsockopt”, or “Connection timed out after x ms” displayed to players when attempting to join.
-![](/blog/20251230-outagereport/image1.png)
+![](/blog/20251230-outagereport/image1.webp)
 
 This issue persisted throughout the morning into the afternoon on the 28th, becoming more widespread as the day progressed. At 16:20, it was determined that no player was able to join the server. Due to this widespread issue, an Urgent Server Maintenance was immediately called at 16:21, where the server was brought offline completely to troubleshoot the issue.
-
-![](/blog/20251230-outagereport/Screenshot2026-01-04171053.png)
+![](/blog/20251230-outagereport/Screenshot2026-01-04171053.webp)
 
 ## The Outage on December 28th
 
-Officially, the outage began at 16:21 on December 28th, however, logs show that the server was intermittently unavailable since 11:29. Player GrandmasterMud was seen attempting to join the server at 13:10 but met with error message “Failed to verify username!”, however they were seen playing on the server between 11:37 and 12:00.
+The outage was announced at 16:21, with an restoration ETA of 18:00 (at that time). However, the server was offline as early as 15:17, but wasn't officially brought down until 16:23. However, upon investigation, it was discovered the server was experiencing troubles as early as 13:10, when player GrandmasterMud attempted to join the server but was met with the error message "Failed to verify username!", which only happens when the server fails to reach the Minecraft Authentication Server. Some logs indicate that the server was intermittently offline starting from 11:30, however we were unable to confirm that beyond a reasonable doubt.
 
-The server under intermittent outage for around one hour before going into full outage/maintenance at 15:17. This outage lasted until 00:04, where the server was once again under intermittent outage until 01:02.
+The server was under intermittent outage for around one hour before going into full outage/maintenance at 16:22. This outage lasted until 00:04, where the server was once again under intermittent outage until 01:02.
 
 The server displayed behaviors of reduced performance after the server was brought back online, where the MSPT of the server was double or more than usual, and TPS dropped below 19.9. We will explain the server behavior as we go, but the server MSPT and TPS did not recover until January 1st, 2026 at 16:33.
 
@@ -38,6 +37,12 @@ The server displayed behaviors of reduced performance after the server was broug
 
 The pre-existing infrastructure used to host the server actually used Windows as it's operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
 
-The cause of this outage was mostly due to a random bug/glitch in Windows Firewall, where it filtered and blocked most activities. This was also an issue that we experienced when we were attempting to reach the server as the server was headless and required RDP to conduct most activities. 
+The cause of this outage was mostly due to a random bug/glitch in Windows Firewall, where it filtered and blocked most activities. This was also an issue that we experienced when we were attempting to reach the server as the server was headless and required RDP to conduct most activities.
 
-Luckily, thanks to pre-existing setup, we were able to use Tailscale to 
+Luckily, we were able to connect to the server using our pre-existing setup through Tailscale. This allowed us to attempt to troubleshoot the current issue of the Firewall randomly blocking all traffic. However, it was quickly determined that the Firewall would not back down for some reason. After 35 minutes of troubleshooting, the server was brought down at 15:17, which marked the beginning of the complete outage.
+
+During the outage, we decided that best solution would be to pivot to Linux while we have the chance to solve multiple problems at the same time. One of the other problems was that the server would constantly send out alerts regarding missing dependencies. While this on it's own was only a minor issue and has no affect on the gameplay, the performance on Windows is often worse than expected. It is also often more difficult to maintain as there is no dedicated terminal and we often have to rely on RDP, which proved to be a challenge when mobile.
+
+After some consideration, it was decided that the server will switch to Proxmox, a Debian-based Linux OS. Backups for the server immediately began while we prepared for the installation. However, as we've mentioned before, it was quickly determined that it would be very difficult to install a new operating system as the server treated all monitors as secondary displays. This meant that the Operating System would have to be installed on the boot drive on another computer then transferred back to the server. This however, proved to take more time than anticipated.
+
+The alternative solution of install the operating system on another computer was only considered at 17:52. We were already 1h30m deep into this disaster recovery operation with little to no progress. Proxmox was successfully installed at 18:10, but quickly required a reinstall as some properties were not set properly during installation. This issue however, was not detected until 22:05, when we attempted to setup the Minecraft Server, but was met with errors instead. The reinstallation began at 22:29, and finished at 22:57.
