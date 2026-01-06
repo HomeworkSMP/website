@@ -33,7 +33,7 @@ The server was under intermittent outage for around one hour before going into f
 
 The server displayed behaviors of reduced performance after the server was brought back online, where the MSPT of the server was double or more than usual, and TPS dropped below 19.9. We will explain the server behavior as we go, but the server MSPT and TPS did not recover until January 1st, 2026 at 16:33.
 
-## What went wrong and How we approached it (Outage 1)
+## What went wrong and How we approached it (Outage on December 28th)
 
 The pre-existing infrastructure used to host the server actually used Windows as it's operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
 
@@ -46,3 +46,118 @@ During the outage, we decided that best solution would be to pivot to Linux whil
 After some consideration, it was decided that the server will switch to Proxmox, a Debian-based Linux OS. Backups for the server immediately began while we prepared for the installation. However, as we've mentioned before, it was quickly determined that it would be very difficult to install a new operating system as the server treated all monitors as secondary displays. This meant that the Operating System would have to be installed on the boot drive on another computer then transferred back to the server. This however, proved to take more time than anticipated.
 
 The alternative solution of install the operating system on another computer was only considered at 17:52. We were already 1h30m deep into this disaster recovery operation with little to no progress. Proxmox was successfully installed at 18:10, but quickly required a reinstall as some properties were not set properly during installation. This issue however, was not detected until 22:05, when we attempted to setup the Minecraft Server, but was met with errors instead. The reinstallation began at 22:29, and finished at 22:57.
+
+The rest of the time that the server was offline was spent on moving and configuring the Minecraft server. As noted before, we were able to get the server back online at 00:04 on December 29th. However, it was quickly noted that the server was performing below expectation. Average MSPT reached 44 or higher, with average TPS dropping below 19.9, at 19.6 or lower.
+
+At this point, it has been almost 9 hours of troubleshooting and nearing 1am local. After a few tweaks, we realized that the MSPT isn't budging and decided to return in 2 days to try again. It was decided and announced at 01:53 that there would be another maintenance. Meanwhile, we acknowledged and kept monitoring the TPS and MSPT of the server.
+
+### Timeline of Outage on December 28th
+<table class="w-full table-auto">
+    <thead>
+        <tr class="text-left border-b border-neutral-900">
+            <th class="py-2">Time (in PST/UTC-08:00)</th>
+            <th class="py-2">Server Status</th>
+            <th class="py-2">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">10:00 12/28/2025</td>
+            <td class="py-2">Normal.</td>
+            <td class="py-2">No errors or recorded outage.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">12:59</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">Alert raised.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">13:05</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">Server fix attempted.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">13:10</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">First recorded outage, player joins failed.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">13:31</td>
+            <td class="py-2">Impacted.</td>
+            <td class="py-2">Server reported as offline.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">14:42</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">Second server fix attempted.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">14:46</td>
+            <td class="py-2">Normal.</td>
+            <td class="py-2">No errors or recorded outage.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">15:17</td>
+            <td class="py-2">Impacted.</td>
+            <td class="py-2">Server reported as offline.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">16:21</td>
+            <td class="py-2">Impacted.</td>
+            <td class="py-2">Outage announced.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">16:23</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Server offline in preparation for recovery.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">17:55</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Proxmox installation 1 began.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">18:10</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Proxmox installation 1 complete.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">20:05</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Server preparation began.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">22:05</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Issue encountered in server preparation.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">22:29</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Proxmox installation 2 began.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">22:57</td>
+            <td class="py-2">Offline.</td>
+            <td class="py-2">Proxmox installation 2 complete. Server preparation began.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">00:04 12/29/2025</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">Server online. Intermittent outages</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">00:48</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">Server online. Outage ends.</td>
+        </tr>
+        <tr class="border-b border-neutral-700">
+            <td class="py-2">01:53</td>
+            <td class="py-2">Degraded.</td>
+            <td class="py-2">Planned Outage on December 30th announced.</td>
+        </tr>
+    </tbody>
+</table>
+
+## Between Outages
+
