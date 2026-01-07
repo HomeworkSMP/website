@@ -64,15 +64,15 @@ At this point, it has been almost 9 hours of troubleshooting and nearing 1am loc
 | 14:46                   | Normal        | No errors or recorded outage.                                   |
 | 15:17                   | Impacted      | Server reported as offline.                                     |
 | 16:21                   | Impacted      | Outage announced.                                               |
-| 16:23                   | Offline       | Server offline in preparation for recovery.                     |
+| 16:23                   | Offline       | Server taken offline in preparation for recovery.               |
 | 17:55                   | Offline       | Proxmox installation 1 began.                                   |
-| 18:10                   | Offline       | Proxmox installation 1 complete.                                |
+| 18:10                   | Offline       | Proxmox installation 1 completed.                               |
 | 20:05                   | Offline       | Server preparation began.                                       |
 | 22:05                   | Offline       | Issue encountered in server preparation.                        |
 | 22:29                   | Offline       | Proxmox installation 2 began.                                   |
-| 22:57                   | Offline       | Proxmox installation 2 complete. Server preparation began.      |
-| 00:04 12/29/2025        | Degraded      | Server online. Intermittent outages.                            |
-| 00:48                   | Degraded      | Server online. Outage ends.                                     |
+| 22:57                   | Offline       | Proxmox installation 2 completed. Server preparation began.     |
+| 00:04 12/29/2025        | Degraded      | Server online. Intermittent outages began.                      |
+| 00:48                   | Degraded      | Intermittent outages ended. End of outage.                      |
 | 01:53                   | Degraded      | Planned outage on December 30th announced.                      |
 |                         |               |                                                                 |
 
@@ -100,26 +100,26 @@ All in all, the process of the second outage mostly went smoothly, with the only
 
 ### Timeline of Outage on December 30th
 
-| Time (in PST/UTC-08:00) | Server Status        | Description                                                     |
-| ----------------------- | -------------------- | --------------------------------------------------------------- |
-| 00:48 12/29/2025        | Degraded             | End of first outage.                                            |
-| 12:00 12/30/2025        | Degraded             | Scheduled outage begins.                                        |
-| 12:38                   | Degraded             | Backups begin.                                                  |
-| 13:20                   | Degraded             | Backups complete.                                               |
-| 13:22                   | Offline              | Server offline.                                                 |
-| 14:59                   | Offline              | Server power off.                                               |
-| 15:05                   | Offline              | First Ubuntu installation attempt.                              |
-| 15:13                   | Offline              | Second Ubuntu installation attempt.                             |
-| 15:21                   | Offline              | Third Ubuntu installation attempt.                              |
-| 16:05                   | Offline              | Issue identified: Disk I/O.                                     |
-| 16:14                   | Offline              | Issue resolved.                                                 |
-| 16:17                   | Offline              | Fourth Ubuntu installation attempt.                             |
-| 16:29                   | Offline              | Motherboard sparked & fried. Operations on hold.                |
-| 17:19                   | Offline              | Motherboard obtained.                                           |
-| 18:47                   | Offline              | Operations resumed.                                             |
-| 18:55                   | Offline              | 5th Ubuntu installation attempt begins.                         |
-| 19:22                   | Offline              | 5th Ubuntu installation complete. Server configuration began.   |
-| 21:44                   | Degraded             | Server online.                                                  |
-| 21:59 – 23:12           | Degraded / Impacted  | Intermittent server outages for performance tweaks.             |
-| 23:15                   | Degraded             | Outage ends.                                                    |
-|                         |                      |                                                                 |
+| Time (in PST/UTC-08:00) | Server Status        | Description                                                      |
+| ----------------------- | -------------------- | ---------------------------------------------------------------- |
+| 00:48 12/29/2025        | Degraded             | End of first outage.                                             |
+| 12:00 12/30/2025        | Degraded             | Scheduled outage began.                                          |
+| 12:38                   | Degraded             | Backups began.                                                   |
+| 13:20                   | Degraded             | Backups completed.                                               |
+| 13:22                   | Offline              | Server taken offline.                                            |
+| 14:59                   | Offline              | Server powered off.                                              |
+| 15:05                   | Offline              | Ubuntu installation attempt 1 began.                             |
+| 15:13                   | Offline              | Ubuntu installation attempt 2 began.                             |
+| 15:21                   | Offline              | Ubuntu installation attempt 3 began.                             |
+| 16:05                   | Offline              | Issue identified: Disk I/O.                                      |
+| 16:14                   | Offline              | Disk I/O issue resolved.                                         |
+| 16:17                   | Offline              | Ubuntu installation attempt 4 began.                             |
+| 16:29                   | Offline              | Motherboard failure. Operations paused.                          |
+| 17:19                   | Offline              | Replacement motherboard obtained.                                |
+| 18:47                   | Offline              | Operations resumed.                                              |
+| 18:55                   | Offline              | Ubuntu installation attempt 5 began.                             |
+| 19:22                   | Offline              | Ubuntu installation completed. Server configuration began.       |
+| 21:44                   | Degraded             | Server online.                                                   |
+| 21:59 – 23:12           | Degraded / Impacted  | Intermittent outages for performance tweaks.                     |
+| 23:15                   | Degraded             | Intermittent outages ended. End of outage.                       |
+|                         |                      |                                                                  |
