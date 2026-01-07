@@ -3,7 +3,7 @@ title: "HomeworkSMP Outage on December 28th-30th, 2025"
 date: "2026-01-05"
 banner: ""
 layout: "../../layouts/BlogPostLayout.astro"
-readingTime: 5
+readingTime: 8
 author: "@waitwhatActo"
 ---
 
@@ -22,12 +22,12 @@ I would like to apologize for this outage, as this is an issue that could’ve b
 Issues began occurring in the morning hours of December 28th, when players began encountering issues connecting to the server. Some players reported difficulty joining the server, with error messages such as “Network is unreachable”, “Connection timed out: getsockopt”, or “Connection timed out after x ms” displayed to players when attempting to join.
 ![](/blog/20251230-outagereport/image1.webp)
 
-This issue persisted throughout the morning into the afternoon on the 28th, becoming more widespread as the day progressed. At 16:20, it was determined that no player was able to join the server. Due to this widespread issue, an Urgent Server Maintenance was immediately called at 16:21, where the server was brought offline completely to troubleshoot the issue.
+This issue persisted throughout the morning into the afternoon on the 28th, becoming more widespread as the day progressed. At 16:20, it was determined that no player was able to join the server. Due to this widespread issue, an Urgent server Maintenance was immediately called at 16:21, where the server was brought offline completely to troubleshoot the issue.
 ![](/blog/20251230-outagereport/Screenshot2026-01-04171053.webp)
 
 ## The Outage on December 28th
 
-The outage was announced at 16:21, with an restoration ETA of 18:00 (at that time). However, the server was offline as early as 15:17, but wasn't officially brought down until 16:23. However, upon investigation, it was discovered the server was experiencing troubles as early as 13:10, when player GrandmasterMud attempted to join the server but was met with the error message "Failed to verify username!", which only happens when the server fails to reach the Minecraft Authentication Server. Some logs indicate that the server was intermittently offline starting from 11:30, however we were unable to confirm that beyond a reasonable doubt.
+The outage was announced at 16:21, with an restoration ETA of 18:00 (at that time). However, the server was offline as early as 15:17, but wasn't officially brought down until 16:23. However, upon investigation, it was discovered the server was experiencing troubles as early as 13:10, when player GrandmasterMud attempted to join the server but was met with the error message "Failed to verify username!", which only happens when the server fails to reach the Minecraft Authentication server. Some logs indicate that the server was intermittently offline starting from 11:30, however we were unable to confirm that beyond a reasonable doubt.
 
 The server was under intermittent outage for around one hour before going into full outage/maintenance at 16:22. This outage lasted until 00:04, where the server was once again under intermittent outage until 01:02.
 
@@ -35,7 +35,7 @@ The server displayed behaviors of reduced performance after the server was broug
 
 ## What went wrong and How we approached it (Outage on December 28th)
 
-The pre-existing infrastructure used to host the server actually used Windows as it's operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
+The pre-existing infrastructure used to host the server actually used Windows as its operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
 
 The cause of this outage was mostly due to a random bug/glitch in Windows Firewall, where it filtered and blocked most activities. This was also an issue that we experienced when we were attempting to reach the server as the server was headless and required RDP to conduct most activities.
 
@@ -45,119 +45,81 @@ During the outage, we decided that best solution would be to pivot to Linux whil
 
 After some consideration, it was decided that the server will switch to Proxmox, a Debian-based Linux OS. Backups for the server immediately began while we prepared for the installation. However, as we've mentioned before, it was quickly determined that it would be very difficult to install a new operating system as the server treated all monitors as secondary displays. This meant that the Operating System would have to be installed on the boot drive on another computer then transferred back to the server. This however, proved to take more time than anticipated.
 
-The alternative solution of install the operating system on another computer was only considered at 17:52. We were already 1h30m deep into this disaster recovery operation with little to no progress. Proxmox was successfully installed at 18:10, but quickly required a reinstall as some properties were not set properly during installation. This issue however, was not detected until 22:05, when we attempted to setup the Minecraft Server, but was met with errors instead. The reinstallation began at 22:29, and finished at 22:57.
+The alternative solution of install the operating system on another computer was only considered at 17:52. We were already 1h30m deep into this disaster recovery operation with little to no progress. Proxmox was successfully installed at 18:10, but quickly required a reinstall as some properties were not set properly during installation. This issue however, was not detected until 22:05, when we attempted to setup the Minecraft server, but was met with errors instead. The reinstallation began at 22:29, and finished at 22:57.
 
 The rest of the time that the server was offline was spent on moving and configuring the Minecraft server. As noted before, we were able to get the server back online at 00:04 on December 29th. However, it was quickly noted that the server was performing below expectation. Average MSPT reached 44 or higher, with average TPS dropping below 19.9, at 19.6 or lower.
 
 At this point, it has been almost 9 hours of troubleshooting and nearing 1am local. After a few tweaks, we realized that the MSPT isn't budging and decided to return in 2 days to try again. It was decided and announced at 01:53 that there would be another maintenance. Meanwhile, we acknowledged and kept monitoring the TPS and MSPT of the server.
 
 ### Timeline of Outage on December 28th
-<table class="w-full table-auto">
-    <thead>
-        <tr class="text-left border-b border-neutral-900">
-            <th class="py-2">Time (in PST/UTC-08:00)</th>
-            <th class="py-2">Server Status</th>
-            <th class="py-2">Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">10:00 12/28/2025</td>
-            <td class="py-2">Normal.</td>
-            <td class="py-2">No errors or recorded outage.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">12:59</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">Alert raised.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">13:05</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">Server fix attempted.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">13:10</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">First recorded outage, player joins failed.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">13:31</td>
-            <td class="py-2">Impacted.</td>
-            <td class="py-2">Server reported as offline.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">14:42</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">Second server fix attempted.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">14:46</td>
-            <td class="py-2">Normal.</td>
-            <td class="py-2">No errors or recorded outage.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">15:17</td>
-            <td class="py-2">Impacted.</td>
-            <td class="py-2">Server reported as offline.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">16:21</td>
-            <td class="py-2">Impacted.</td>
-            <td class="py-2">Outage announced.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">16:23</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Server offline in preparation for recovery.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">17:55</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Proxmox installation 1 began.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">18:10</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Proxmox installation 1 complete.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">20:05</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Server preparation began.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">22:05</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Issue encountered in server preparation.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">22:29</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Proxmox installation 2 began.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">22:57</td>
-            <td class="py-2">Offline.</td>
-            <td class="py-2">Proxmox installation 2 complete. Server preparation began.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">00:04 12/29/2025</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">Server online. Intermittent outages</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">00:48</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">Server online. Outage ends.</td>
-        </tr>
-        <tr class="border-b border-neutral-700">
-            <td class="py-2">01:53</td>
-            <td class="py-2">Degraded.</td>
-            <td class="py-2">Planned Outage on December 30th announced.</td>
-        </tr>
-    </tbody>
-</table>
+
+| Time (in PST/UTC-08:00) | Server Status | Description                                                     |
+| ----------------------- | ------------- | --------------------------------------------------------------- |
+| 10:00 12/28/2025        | Normal        | No errors or recorded outage.                                   |
+| 12:59                   | Degraded      | Alert raised.                                                   |
+| 13:05                   | Degraded      | Server fix attempted.                                           |
+| 13:10                   | Degraded      | First recorded outage, player joins failed.                     |
+| 13:31                   | Impacted      | Server reported as offline.                                     |
+| 14:42                   | Degraded      | Second server fix attempted.                                    |
+| 14:46                   | Normal        | No errors or recorded outage.                                   |
+| 15:17                   | Impacted      | Server reported as offline.                                     |
+| 16:21                   | Impacted      | Outage announced.                                               |
+| 16:23                   | Offline       | Server offline in preparation for recovery.                     |
+| 17:55                   | Offline       | Proxmox installation 1 began.                                   |
+| 18:10                   | Offline       | Proxmox installation 1 complete.                                |
+| 20:05                   | Offline       | Server preparation began.                                       |
+| 22:05                   | Offline       | Issue encountered in server preparation.                        |
+| 22:29                   | Offline       | Proxmox installation 2 began.                                   |
+| 22:57                   | Offline       | Proxmox installation 2 complete. Server preparation began.      |
+| 00:04 12/29/2025        | Degraded      | Server online. Intermittent outages.                            |
+| 00:48                   | Degraded      | Server online. Outage ends.                                     |
+| 01:53                   | Degraded      | Planned outage on December 30th announced.                      |
+|                         |               |                                                                 |
 
 ## Between Outages
 
+Between the two outages, we were closely monitoring the TPS and MSPT of the server. The MSPT and TPS of the server reached historic low levels, bottoming at around 9 TPS (1%), with its average being 17 TPS (50%, with players). Sustained MSPT was 50-60ms for the most part, which means gameplay was severely affected by lag.
+
+![](/blog/20251230-outagereport/Screenshot2026-01-06231259.webp)
+
+We would like to note that between 11:00 12/28/2025 and the beginning of the second outage, we were able to verify that no data was lost in the process.
+
+Before we dive into what happened during the 2nd outage, we would like to once again apologize for the prolonged outages that HomeworkSMP experienced within 3 days. While the server maintained an uptime of 99.06% in 2025, we acknowledge that the server was only had an uptime of 78% between 00:00 12/28/2025 and 23:59 12/30/2025. This was unacceptable to both the community and us. Moving forward, we will work on increased maintenance to prevent the same mistakes we have made for the past 2 years.
+
+## How we used the 2nd Outage to fully recover the server (Outage on December 30th)
+
+Due to the degraded performance we were experiencing on Proxmox, we decided to give Ubuntu a shot, as it is something we are quite familiar with, and previously used to host HomeworkSMP (back in 2024). While the outage was scheduled for 12:00, server backups began at 12:38 due to external factors. The backups were complete at 13:20 and the server was taken offline at 13:22. Proper backup steps were taken to ensure no data was lost due to the maintenance, which led to the power off time of the server at 14:59.
+
+Following the power off of the server, we immediately began to attempt the installation of Ubuntu. However, we were met with resistance as the installer refused to launch properly. Reviewing the logs showed disk I/O issues when the installer attempted to install Ubuntu. This required additional time to conduct a full disk clean before we were able to install Ubuntu. The installation was attempted 3 times, between 15:05 and 16:07. The disk was cleaned at 16:17, which led to the attempted installation at 16:28.
+
+At 16:29, the motherboard used to install the operating system on the disk was fried accidentally when I installed a drive with the server still powered. This halted all progress as a functioning motherboard was required to install the OS onto the drive. Luckily, we were able to purchase a new motherboard by 17:19, and be back in operation by 18:47. The 5th Ubuntu installation, which began at 18:55, was successful.
+
+By 19:22, we began configuring the server for the best performance possible. We were able to get the server back online at 21:44, where we had intermittent outages from then until 23:12. This was mostly due to performance tweaks, where we had to apply settings through a full reboot.
+
+All in all, the process of the second outage mostly went smoothly, with the only hiccup being I/O issues and motherboard ordeals. The second outage duration could've been significantly shorter if neither of these happened.
+
+### Timeline of Outage on December 30th
+
+| Time (in PST/UTC-08:00) | Server Status        | Description                                                     |
+| ----------------------- | -------------------- | --------------------------------------------------------------- |
+| 00:48 12/29/2025        | Degraded             | End of first outage.                                            |
+| 12:00 12/30/2025        | Degraded             | Scheduled outage begins.                                        |
+| 12:38                   | Degraded             | Backups begin.                                                  |
+| 13:20                   | Degraded             | Backups complete.                                               |
+| 13:22                   | Offline              | Server offline.                                                 |
+| 14:59                   | Offline              | Server power off.                                               |
+| 15:05                   | Offline              | First Ubuntu installation attempt.                              |
+| 15:13                   | Offline              | Second Ubuntu installation attempt.                             |
+| 15:21                   | Offline              | Third Ubuntu installation attempt.                              |
+| 16:05                   | Offline              | Issue identified: Disk I/O.                                     |
+| 16:14                   | Offline              | Issue resolved.                                                 |
+| 16:17                   | Offline              | Fourth Ubuntu installation attempt.                             |
+| 16:29                   | Offline              | Motherboard sparked & fried. Operations on hold.                |
+| 17:19                   | Offline              | Motherboard obtained.                                           |
+| 18:47                   | Offline              | Operations resumed.                                             |
+| 18:55                   | Offline              | 5th Ubuntu installation attempt begins.                         |
+| 19:22                   | Offline              | 5th Ubuntu installation complete. Server configuration began.   |
+| 21:44                   | Degraded             | Server online.                                                  |
+| 21:59 – 23:12           | Degraded / Impacted  | Intermittent server outages for performance tweaks.             |
+| 23:15                   | Degraded             | Outage ends.                                                    |
+|                         |                      |                                                                 |
