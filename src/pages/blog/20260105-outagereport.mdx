@@ -123,3 +123,7 @@ All in all, the process of the second outage mostly went smoothly, with the only
 | 21:59 – 23:12           | Degraded / Impacted  | Intermittent outages for performance tweaks.                     |
 | 23:15                   | Degraded             | Intermittent outages ended. End of outage.                       |
 |                         |                      |                                                                  |
+
+## Degraded Performance after the Outages
+
+As you might've noticed, the last server status on the timeline indicates that the server was still in a degraded state after both outages. The server was able to sustain a higher average TPS and MSPT than the previous one, at 16 TPS (50%). This issue was being closely monitored and investigated, until 2026/1/1 where we discovered that the performance was being throttled due to the battery of the server being removed. The battery was previously removed during the first outage to reduce annoyance, and was not put back in. The server fully recovered at 16:33, when the battery was installed back into the server.
