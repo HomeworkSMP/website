@@ -4,10 +4,10 @@ date: "2026-01-05"
 banner: ""
 layout: "../../layouts/BlogPostLayout.astro"
 readingTime: 8
-author: "waitwhatActo/@acto."
+author: "waitwhatActo"
 ---
 
-On December 28th and 30th, 2025, HomeworkSMP experienced two of its longest outages ever, and its longest outage ever since the start of HomeworkSMP. The total downtime across both outages reached 19 hours and 40 minutes, and the server was fully on January 1st, 2026 at 16:33 (all times in this post are in PST/UTC-08:00).
+On December 28th and 30th, 2025, HomeworkSMP experienced two of its longest outages ever since the start of this SMP and this World. The total downtime across both outages reached 19 hours and 40 minutes, and the server was fully restored on January 1st, 2026 at 16:33 (all times in this post are in PST/UTC-08:00).
 The primary cause of the incident was infrastructure issues, with maintenance debt and human error attributing to prolonging the outage. We would like to sincerely apologize for the significant disruption over these four days. This outage was preventable, and moving forward we will be working towards reducing the downtime of the server and preventing similar incidents.
 
 ## Root cause of the Outage
@@ -22,52 +22,44 @@ Recovery was further delayed by procedural and hardware-related issues, includin
 
 - Limited physical access and reliance on RDP for a headless system
 - Display and installation issues during OS deployment
-- Disk I/O errors during reinstallation attempts
+- Disk permission errors during reinstallation attempts
 - Hardware failure during recovery operations
 
-In summary, the root cause was an unsuitable operating system and insufficient preventive maintenance, with human and procedural errors contributing to the duration—but not the initiation—of the outage.
+In summary, the root cause was an unsuitable operating system and insufficient preventive maintenance, with human and procedural errors contributing to the duration of the outage.
 
-## The Outage
+## The Incident
 
-### Morning of December 28th
+### Day 1: Initial Failure and First Outage (Dec 28, 2025)
 
-Issues began occurring in the morning hours of December 28th, when players began encountering issues connecting to the server. Some players reported difficulty joining the server, with error messages such as “Network is unreachable”, “Connection timed out: getsockopt”, or “Connection timed out after x ms” displayed to players when attempting to join.
+#### Early Symptoms
+
+Issues began in the morning of December 28, when players reported intermittent failures connecting to the server. Common errors included “Network is unreachable,” “Connection timed out,” and authentication-related failures.
 
 ![Failed to connect to the server screen with error message "Network is Unreachable"](/blog/20251230-outagereport/image1.webp) Image credit: 277V/@ethernet0
 
-This issue persisted throughout the morning into the afternoon on the 28th, becoming more widespread as the day progressed. At 16:20, it was determined that no player was able to join the server. Due to this widespread issue, an Urgent server Maintenance was immediately called at 16:21, where the server was brought offline completely to troubleshoot the issue.
+By early afternoon, these issues became more frequent. At 16:20, it was confirmed that no players were able to join the server.
 
-![](/blog/20251230-outagereport/Screenshot2026-01-04171053.webp)
+![Server outage announcement by Acto](/blog/20251230-outagereport/Screenshot2026-01-04171053.webp)
 
-### Outage of December 28th
+#### Escalation to Full Outage
 
-The outage was announced at 16:21, with an restoration ETA of 18:00 (at that time). However, the server was offline as early as 15:17, but wasn't officially brought down until 16:23. However, upon investigation, it was discovered the server was experiencing troubles as early as 13:10, when player GrandmasterMud attempted to join the server but was met with the error message "Failed to verify username!", which only happens when the server fails to reach the Minecraft Authentication server. Some logs indicate that the server was intermittently offline starting from 11:30, however we were unable to confirm that beyond a reasonable doubt.
+Although the outage was officially announced at 16:21, the server had already experienced intermittent failures earlier in the day. Logs indicate the first confirmed authentication failure occurred at 13:10, consistent with loss of external connectivity.
 
-The server was under intermittent outage for around one hour before going into full outage/maintenance at 16:22. This outage lasted until 00:04, where the server was once again under intermittent outage until 01:02.
+By 15:17, the server was effectively offline, though it was not formally taken down for maintenance until 16:23. At that point, the incident was escalated to an urgent maintenance.
 
-The server displayed behaviors of reduced performance after the server was brought back online, where the MSPT of the server was double or more than usual, and TPS dropped below 19.9. We will explain the server behavior as we go, but the server MSPT and TPS did not recover until January 1st, 2026 at 16:33.
+#### Actions Taken
 
-MSPT (MilliSeconds Per Tick) and TPS (Ticks Per Second) is what we use to measure the performance of a server. Typically, the TPS of a server should sit at 20, while the MSPT should be under 50. Anything under 20 TPS or over 50 MSPT will result in visible lag.
+Initial troubleshooting focused on restoring network connectivity and external service access. Due to the server’s headless configuration and reliance on RDP, access was limited. Tailscale was used to regain access.
 
-### What went wrong and How we approached it (Outage on December 28th)
+After approximately 35 minutes of unsuccessful recovery attempts, it was determined that recovery would require a full operating system change rather than a live fix. At this point, the decision was made to migrate the server to Linux as part of the recovery process.
 
-The pre-existing infrastructure used to host the server actually used Windows as its operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
+#### Partial Restoration and Degraded State
 
-The cause of this outage was mostly due to a random bug/glitch in Windows Firewall, where it filtered and blocked most activities. This was also an issue that we experienced when we were attempting to reach the server as the server was headless and required RDP to conduct most activities.
+The server was brought back online at 00:04 on December 29. While connectivity was restored, performance was severely degraded. Average MSPT exceeded normal levels, and TPS frequently dropped below acceptable thresholds.
 
-Luckily, we were able to connect to the server using our pre-existing setup through Tailscale. This allowed us to attempt to troubleshoot the current issue of the Firewall randomly blocking all traffic. However, it was quickly determined that the Firewall would not back down for some reason. After 35 minutes of troubleshooting, the server was brought down at 15:17, which marked the beginning of the complete outage.
+After several configuration attempts, it became clear that further recovery work would be required. At 01:53, a second maintenance window was announced for December 30.
 
-During the outage, we decided that best solution would be to pivot to Linux while we have the chance to solve multiple problems at the same time. One of the other problems was that the server would constantly send out alerts regarding missing dependencies. While this on it's own was only a minor issue and has no affect on the gameplay, the performance on Windows is often worse than expected. It is also often more difficult to maintain as there is no dedicated terminal and we often have to rely on RDP, which proved to be a challenge when mobile.
-
-After some consideration, it was decided that the server will switch to Proxmox, a Debian-based Linux OS. Backups for the server immediately began while we prepared for the installation. However, as we've mentioned before, it was quickly determined that it would be very difficult to install a new operating system as the server treated all monitors as secondary displays. This meant that the Operating System would have to be installed on the boot drive on another computer then transferred back to the server. This however, proved to take more time than anticipated.
-
-The alternative solution of install the operating system on another computer was only considered at 17:52. We were already 1h30m deep into this disaster recovery operation with little to no progress. Proxmox was successfully installed at 18:10, but quickly required a reinstall as some properties were not set properly during installation. This issue however, was not detected until 22:05, when we attempted to setup the Minecraft server, but was met with errors instead. The reinstallation began at 22:29, and finished at 22:57.
-
-The rest of the time that the server was offline was spent on moving and configuring the Minecraft server. As noted before, we were able to get the server back online at 00:04 on December 29th. However, it was quickly noted that the server was performing below expectation. Average MSPT reached 44 or higher, with average TPS dropping below 19.9, at 19.6 or lower.
-
-At this point, it has been almost 9 hours of troubleshooting and nearing 1am local. After a few tweaks, we realized that the MSPT isn't budging and decided to return in 2 days to try again. It was decided and announced at 01:53 that there would be another maintenance. Meanwhile, we acknowledged and kept monitoring the TPS and MSPT of the server.
-
-#### Timeline of Outage on December 28th
+#### Timeline
 
 | Time (in PST/UTC-08:00) | Server Status | Description                                                     |
 | ----------------------- | ------------- | --------------------------------------------------------------- |
@@ -94,27 +86,27 @@ At this point, it has been almost 9 hours of troubleshooting and nearing 1am loc
 
 ### Between Outages
 
-Between the two outages, we were closely monitoring the TPS and MSPT of the server. The MSPT and TPS of the server reached historic low levels, bottoming at around 9 TPS (1%), with its average being 17 TPS (50%, with players). Sustained MSPT was 50-60ms for the most part, which means gameplay was severely affected by lag.
+Following partial restoration on December 29, the server performance was closely being monitored. Under a 7 player load, the server performance reached historic low levels, bottoming at 9 TPS at worst, averaging at around 17 TPS. To address these, a planned maintenance window was scheduled for December 30 to migrate the server to Ubuntu.
 
 ![](/blog/20251230-outagereport/Screenshot2026-01-06231259.webp)
 
-We would like to note that between 11:00 12/28/2025 and the beginning of the second outage, we were able to verify that no data was lost in the process.
+### Day 2: Planned Recovery Outage (Dec 30, 2025)
 
-Before we dive into what happened during the 2nd outage, we would like to once again apologize for the prolonged outages that HomeworkSMP experienced within 3 days. While the server maintained an uptime of 99.06% in 2025, we acknowledge that the server was only had an uptime of 78% between 00:00 12/28/2025 and 23:59 12/30/2025. This was unacceptable to both the community and us. Moving forward, we will work on increased maintenance to prevent the same mistakes we have made for the past 2 years.
+#### Outage Initiation and Backups
 
-### How we used the 2nd Outage to fully recover the server (Outage on December 30th)
+Due to persistent performance issues under Proxmox, the decision was made to migrate the server to Ubuntu, which had previously proven stable. The scheduled outage began at 12:00, with backups starting at 12:38 and completing at 13:20. The server was taken offline at 13:22, and proper backup procedures ensured no data was lost. The server was powered off at 14:59.
 
-Due to the degraded performance we were experiencing on Proxmox, we decided to give Ubuntu a shot, as it is something we are quite familiar with, and previously used to host HomeworkSMP (back in 2024). While the outage was scheduled for 12:00, server backups began at 12:38 due to external factors. The backups were complete at 13:20 and the server was taken offline at 13:22. Proper backup steps were taken to ensure no data was lost due to the maintenance, which led to the power off time of the server at 14:59.
+#### Installation Attempts and Hardware Challenges
 
-Following the power off of the server, we immediately began to attempt the installation of Ubuntu. However, we were met with resistance as the installer refused to launch properly. Reviewing the logs showed disk I/O issues when the installer attempted to install Ubuntu. This required additional time to conduct a full disk clean before we were able to install Ubuntu. The installation was attempted 3 times, between 15:05 and 16:07. The disk was cleaned at 16:17, which led to the attempted installation at 16:28.
+The Ubuntu installation encountered multiple obstacles. Initial attempts failed due to disk permission errors, requiring a full disk wipe before the installation could proceed. Installation attempts were made at 15:05, 15:13, and 15:21, all unsuccessful. After resolving the permission issues at 16:17, a fourth installation was attempted at 16:28.
 
-At 16:29, the motherboard used to install the operating system on the disk was fried accidentally when I installed a drive with the server still powered. This halted all progress as a functioning motherboard was required to install the OS onto the drive. Luckily, we were able to purchase a new motherboard by 17:19, and be back in operation by 18:47. The 5th Ubuntu installation, which began at 18:55, was successful.
+At 16:29, the motherboard used for the installation failed during hardware handling while powered, halting progress. A replacement motherboard was acquired by 17:19, and operations resumed at 18:47. The fifth installation, beginning at 18:55, completed successfully.
 
-By 19:22, we began configuring the server for the best performance possible. We were able to get the server back online at 21:44, where we had intermittent outages from then until 23:12. This was mostly due to performance tweaks, where we had to apply settings through a full reboot.
+#### Restoration and Degraded Performance
 
-All in all, the process of the second outage mostly went smoothly, with the only hiccup being I/O issues and motherboard ordeals. The second outage duration could've been significantly shorter if neither of these happened.
+Server configuration and performance tuning began at 19:22. The server returned online at 21:44, with intermittent performance issues continuing until 23:12 due to final configuration adjustments and reboots. After this, the server stabilized in a degraded state, with full recovery achieved on January 1, 2026.
 
-#### Timeline of Outage on December 30th
+#### Timeline
 
 | Time (in PST/UTC-08:00) | Server Status        | Description                                                      |
 | ----------------------- | -------------------- | ---------------------------------------------------------------- |
@@ -142,4 +134,14 @@ All in all, the process of the second outage mostly went smoothly, with the only
 
 ## Degraded Performance after the Outages
 
-As you might've noticed, the last server status on the timeline indicates that the server was still in a degraded state after both outages. The server was able to sustain a higher average TPS and MSPT than the previous one, at 16 TPS (50%). This issue was being closely monitored and investigated, until 2026/1/1 where we discovered that the performance was being throttled due to the battery of the server being removed. The battery was previously removed during the first outage to reduce annoyance, and was not put back in. The server fully recovered at 16:33, when the battery was installed back into the server.
+Even after the server came back online following the second outage, performance remained degraded. Average TPS stabilized around 17 (50%) while MSPT remained above optimal levels, resulting in noticeable lag during gameplay.
+
+We closely monitored the system to identify the cause. On January 1, 2026, it was discovered that performance was being throttled because the server’s battery had been removed during the first outage to reduce operational interruptions and had not been reinstalled. Once the battery was replaced at 16:33, the server returned to full performance, with TPS and MSPT within normal operating thresholds.
+
+## What we learned
+
+These outages emphasized the importance of proactive maintenance and infrastructure planning. Windows proved to be an unsuitable long-term environment for a headless Minecraft server, and deferring the planned migration to Linux left the system fragile and vulnerable to extended downtime. We also learned that relying solely on RDP for administrative access is insufficient for a headless server setup, and that simultaneous hardware, OS, and disk-level issues can compound recovery efforts. Even seemingly minor oversights, such as removing the battery, can have a significant impact on performance. The experience reinforced the value of robust backups, continuous monitoring, and thorough documentation to prevent data loss and maintain uptime.
+
+## How we are preventing a reoccurrence
+
+Moving forward, HomeworkSMP has implemented a series of measures to prevent similar incidents. The server has been fully migrated to Ubuntu Linux with a tested and repeatable deployment procedure. Recovery procedures have been updated to account for hardware failures, installation challenges, and other simultaneous failures. Redundant administrative access methods have been established, including Tailscale, Cloudflared, SSH, and direct console access. In addition, continuous monitoring of TPS and MSPT with automated alerts will allow the team to respond quickly to performance degradation. Finally, all procedures, lessons learned, and best practices are now documented comprehensively to guide future maintenance and onboarding.
