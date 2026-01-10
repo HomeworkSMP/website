@@ -59,7 +59,7 @@ The server was brought back online at 00:04 on December 29. While connectivity w
 
 After several configuration attempts, it became clear that further recovery work would be required. At 01:53, a second maintenance window was announced for December 30.
 
-#### Timeline
+#### Timeline of Day 1
 
 | Time (in PST/UTC-08:00) | Server Status | Description                                                     |
 | ----------------------- | ------------- | --------------------------------------------------------------- |
@@ -88,7 +88,7 @@ After several configuration attempts, it became clear that further recovery work
 
 Following partial restoration on December 29, the server performance was closely being monitored. Under a 7 player load, the server performance reached historic low levels, bottoming at 9 TPS at worst, averaging at around 17 TPS. To address these, a planned maintenance window was scheduled for December 30 to migrate the server to Ubuntu.
 
-![](/blog/20260110-outagereport/Screenshot2026-01-06231259.webp)
+![Graph showing server TPS and player count from Dec 27 to Jan 2. TPS dropped to 9 around 19:00 on Dec 29 with 7 players online, and to 15 around 12:00 on Dec 31 with 3 players online.](/blog/20260110-outagereport/Screenshot2026-01-06231259.webp)
 
 ### Day 2: Planned Recovery Outage (Dec 30, 2025)
 
@@ -106,7 +106,7 @@ At 16:29, the motherboard used for the installation failed during hardware handl
 
 Server configuration and performance tuning began at 19:22. The server returned online at 21:44, with intermittent performance issues continuing until 23:12 due to final configuration adjustments and reboots. After this, the server stabilized in a degraded state, with full recovery achieved on January 1, 2026.
 
-#### Timeline
+#### Timeline of Day 2
 
 | Time (in PST/UTC-08:00) | Server Status        | Description                                                      |
 | ----------------------- | -------------------- | ---------------------------------------------------------------- |
@@ -137,6 +137,8 @@ Server configuration and performance tuning began at 19:22. The server returned 
 Even after the server came back online following the second outage, performance remained degraded. Average TPS stabilized around 17 (50%) while MSPT remained above optimal levels, resulting in noticeable lag during gameplay.
 
 We closely monitored the system to identify the cause. On January 1, 2026, it was discovered that performance was being throttled because the server’s battery had been removed during the first outage to reduce operational interruptions and had not been reinstalled. Once the battery was replaced at 16:33, the server returned to full performance, with TPS and MSPT within normal operating thresholds.
+
+We’d like to sincerely thank 277V/@ethernet0 for their support throughout this outage, providing guidance on technical challenges and helping us navigate the recovery process. Their help made a significant difference in how we were able to restore the server.
 
 ## What we learned
 
