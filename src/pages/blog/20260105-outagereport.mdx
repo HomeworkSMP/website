@@ -4,28 +4,42 @@ date: "2026-01-05"
 banner: ""
 layout: "../../layouts/BlogPostLayout.astro"
 readingTime: 8
-author: "@waitwhatActo"
+author: "waitwhatActo/@acto."
 ---
 
-On December 28th, 2025, HomeworkSMP experienced its longest outage since the start of HomeworkSMP, and one of the longest outages since the start of this world.
+On December 28th and 30th, 2025, HomeworkSMP experienced two of its longest outages ever, and its longest outage ever since the start of HomeworkSMP. The total downtime across both outages reached 19 hours and 40 minutes, and the server was fully on January 1st, 2026 at 16:33 (all times in this post are in PST/UTC-08:00).
+The primary cause of the incident was infrastructure issues, with maintenance debt and human error attributing to prolonging the outage. We would like to sincerely apologize for the significant disruption over these four days. This outage was preventable, and moving forward we will be working towards reducing the downtime of the server and preventing similar incidents.
 
-The outage was announced at 2025/12/28 16:21 (all times in this post are in PST/UTC-08:00, unless specified otherwise), marking the start of the 7-hour complete outage on December 28th, and the 8-hour complete outage on December 30th. The actual outage time reached 19 hours and 40 minutes across both days, however, some were caused by intermittent outages before and after each outage.
+## Root cause of the Outage
 
-The server was operational at 01:02 (12/29) and 23:12 respectively for the outage on the 28th and the outage on the 30th. The server was fully recovered and operational on 2026/1/1 at 16:33.
+The outage was caused by a combination of infrastructure misconfiguration, operating system limitations, and deferred maintenance, which together resulted in a prolonged and complex recovery.
 
-This outage was caused by pre-existing issues with our infrastructure. However, human error and procrastination also attributed to this prolonged outage.
+The server was hosted on Windows, an environment that proved unsuitable for long-term, headless server operation. On December 28, a failure within Windows Firewall began silently dropping inbound and outbound traffic, preventing the server from communicating reliably with external services, including Minecraft authentication servers, and any server joins. This led to connection failures and intermittent outages before the server was taken offline.
 
-I would like to apologize for this outage, as this is an issue that could’ve been addressed during a planned maintenance within 4 hours.
+The impact of this failure was significantly worsened by overdue maintenance. Plans to migrate the server to Linux had been postponed multiple times, leaving the system in a fragile state. As a result, once the firewall issue occurred, recovery required a full operating system migration rather than a targeted fix.
 
-## The Beginning
+Recovery was further delayed by procedural and hardware-related issues, including:
+
+- Limited physical access and reliance on RDP for a headless system
+- Display and installation issues during OS deployment
+- Disk I/O errors during reinstallation attempts
+- Hardware failure during recovery operations
+
+In summary, the root cause was an unsuitable operating system and insufficient preventive maintenance, with human and procedural errors contributing to the duration—but not the initiation—of the outage.
+
+## The Outage
+
+### Morning of December 28th
 
 Issues began occurring in the morning hours of December 28th, when players began encountering issues connecting to the server. Some players reported difficulty joining the server, with error messages such as “Network is unreachable”, “Connection timed out: getsockopt”, or “Connection timed out after x ms” displayed to players when attempting to join.
-![](/blog/20251230-outagereport/image1.webp)
+
+![Failed to connect to the server screen with error message "Network is Unreachable"](/blog/20251230-outagereport/image1.webp) Image credit: 277V/@ethernet0
 
 This issue persisted throughout the morning into the afternoon on the 28th, becoming more widespread as the day progressed. At 16:20, it was determined that no player was able to join the server. Due to this widespread issue, an Urgent server Maintenance was immediately called at 16:21, where the server was brought offline completely to troubleshoot the issue.
+
 ![](/blog/20251230-outagereport/Screenshot2026-01-04171053.webp)
 
-## The Outage on December 28th
+### Outage of December 28th
 
 The outage was announced at 16:21, with an restoration ETA of 18:00 (at that time). However, the server was offline as early as 15:17, but wasn't officially brought down until 16:23. However, upon investigation, it was discovered the server was experiencing troubles as early as 13:10, when player GrandmasterMud attempted to join the server but was met with the error message "Failed to verify username!", which only happens when the server fails to reach the Minecraft Authentication server. Some logs indicate that the server was intermittently offline starting from 11:30, however we were unable to confirm that beyond a reasonable doubt.
 
@@ -33,7 +47,9 @@ The server was under intermittent outage for around one hour before going into f
 
 The server displayed behaviors of reduced performance after the server was brought back online, where the MSPT of the server was double or more than usual, and TPS dropped below 19.9. We will explain the server behavior as we go, but the server MSPT and TPS did not recover until January 1st, 2026 at 16:33.
 
-## What went wrong and How we approached it (Outage on December 28th)
+MSPT (MilliSeconds Per Tick) and TPS (Ticks Per Second) is what we use to measure the performance of a server. Typically, the TPS of a server should sit at 20, while the MSPT should be under 50. Anything under 20 TPS or over 50 MSPT will result in visible lag.
+
+### What went wrong and How we approached it (Outage on December 28th)
 
 The pre-existing infrastructure used to host the server actually used Windows as its operating system. This was not the ideal solution, and for a long time, there were plans to switch the server to Linux. However, numerous issues were met when we tried switching the server to Linux the first time, including the server treating all displays as a secondary display, which prevented us from installing anything properly.
 
@@ -51,7 +67,7 @@ The rest of the time that the server was offline was spent on moving and configu
 
 At this point, it has been almost 9 hours of troubleshooting and nearing 1am local. After a few tweaks, we realized that the MSPT isn't budging and decided to return in 2 days to try again. It was decided and announced at 01:53 that there would be another maintenance. Meanwhile, we acknowledged and kept monitoring the TPS and MSPT of the server.
 
-### Timeline of Outage on December 28th
+#### Timeline of Outage on December 28th
 
 | Time (in PST/UTC-08:00) | Server Status | Description                                                     |
 | ----------------------- | ------------- | --------------------------------------------------------------- |
@@ -76,7 +92,7 @@ At this point, it has been almost 9 hours of troubleshooting and nearing 1am loc
 | 01:53                   | Degraded      | Planned outage on December 30th announced.                      |
 |                         |               |                                                                 |
 
-## Between Outages
+### Between Outages
 
 Between the two outages, we were closely monitoring the TPS and MSPT of the server. The MSPT and TPS of the server reached historic low levels, bottoming at around 9 TPS (1%), with its average being 17 TPS (50%, with players). Sustained MSPT was 50-60ms for the most part, which means gameplay was severely affected by lag.
 
@@ -86,7 +102,7 @@ We would like to note that between 11:00 12/28/2025 and the beginning of the sec
 
 Before we dive into what happened during the 2nd outage, we would like to once again apologize for the prolonged outages that HomeworkSMP experienced within 3 days. While the server maintained an uptime of 99.06% in 2025, we acknowledge that the server was only had an uptime of 78% between 00:00 12/28/2025 and 23:59 12/30/2025. This was unacceptable to both the community and us. Moving forward, we will work on increased maintenance to prevent the same mistakes we have made for the past 2 years.
 
-## How we used the 2nd Outage to fully recover the server (Outage on December 30th)
+### How we used the 2nd Outage to fully recover the server (Outage on December 30th)
 
 Due to the degraded performance we were experiencing on Proxmox, we decided to give Ubuntu a shot, as it is something we are quite familiar with, and previously used to host HomeworkSMP (back in 2024). While the outage was scheduled for 12:00, server backups began at 12:38 due to external factors. The backups were complete at 13:20 and the server was taken offline at 13:22. Proper backup steps were taken to ensure no data was lost due to the maintenance, which led to the power off time of the server at 14:59.
 
@@ -98,7 +114,7 @@ By 19:22, we began configuring the server for the best performance possible. We 
 
 All in all, the process of the second outage mostly went smoothly, with the only hiccup being I/O issues and motherboard ordeals. The second outage duration could've been significantly shorter if neither of these happened.
 
-### Timeline of Outage on December 30th
+#### Timeline of Outage on December 30th
 
 | Time (in PST/UTC-08:00) | Server Status        | Description                                                      |
 | ----------------------- | -------------------- | ---------------------------------------------------------------- |
