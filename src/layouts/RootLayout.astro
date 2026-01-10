@@ -1,11 +1,11 @@
 ---
-const { title = "HomeworkSMP" } = Astro.props;
+const { title = "HomeworkSMP", blog = false } = Astro.props;
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
-<html lang="en" class="bg-neutral-950 text-neutral-100">
+<html lang="en" class="bg-neutral-950 text-neutral-100" data-blog={blog}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,6 +26,13 @@ import "../styles/global.css";
         <Footer />
 
         <script>
+            const blog = document.documentElement.dataset.blog;
+
+            if (blog) {
+                document.getElementById("bg1")?.classList.add("blur-md", "brightness-25");
+                document.getElementById("bg2")?.classList.add("blur-md", "brightness-25");
+            }
+
             let index = Math.floor(Math.random() * 64) + 1;
             let showingBg1 = true;
 

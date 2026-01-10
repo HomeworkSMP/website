@@ -5,7 +5,7 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
 ---
 
 <RootLayout title={title}>
-    <div id="post-wrap" class="bg-zinc-600/95 max-w-5xl mx-auto p-8 rounded-xl">
+    <div id="post-wrap" class="bg-neutral-700/95 max-w-5xl mx-auto p-8 rounded-xl">
         <article id="post-article" class="max-w-4xl mx-auto text-neutral-300 space-y-6">
             {
                 banner && (
@@ -18,7 +18,7 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
             <header class="space-y-2">
                 <h1 class="text-4xl md:text-5xl font-bold text-lime-400">{title}</h1>
 
-                <div class="flex flex-wrap items-center gap-2 text-neutral-400 text-sm">
+                <div class="flex flex-wrap items-center gap-2 text-neutral-300/75 text-sm">
                     <span>by {author} • {date} • {readingTime} min read</span>
                 </div>
             </header>
@@ -29,7 +29,7 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
                 </section>
 
                 <aside id="toc" class="lg:sticky top-16 lg:top-24 z-20 w-full lg:w-64 shrink-0 order-1 lg:order-2 self-start">
-                    <div class="rounded-md p-4 bg-neutral-800/60 border border-neutral-700">
+                    <div class="rounded-md p-4 bg-neutral-900/60 border border-neutral-800">
                         <h3 class="text-sm font-semibold text-neutral-200 mb-2">Contents</h3>
                         <nav id="toc-list" class="text-sm text-neutral-300"></nav>
                     </div>
