@@ -4,7 +4,7 @@ const { frontmatter } = Astro.props;
 const { title, author, date, banner, readingTime = 1 } = frontmatter;
 ---
 
-<RootLayout title={title}>
+<RootLayout title={title} blog={true}>
     <div id="post-wrap" class="bg-neutral-700/95 max-w-5xl mx-auto p-8 rounded-xl">
         <article id="post-article" class="max-w-4xl mx-auto text-neutral-300 space-y-6">
             {

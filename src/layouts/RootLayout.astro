@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
-<html lang="en" class="bg-neutral-950 text-neutral-100" data-blog={blog}>
+<html lang="en" class="bg-neutral-950 text-neutral-100">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +13,7 @@ import "../styles/global.css";
         <link rel="icon" type="image/webp" href="/templogo.webp" />
     </head>
 
-    <body class="min-h-screen flex flex-col font-sans relative">
+    <body class="min-h-screen flex flex-col font-sans relative" data-blog={blog}>
         <div id="bg1" class="bg-layer"></div>
         <div id="bg2" class="bg-layer opacity-0"></div>
 
@@ -26,11 +26,11 @@ import "../styles/global.css";
         <Footer />
 
         <script>
-            const blog = document.documentElement.dataset.blog;
-
-            if (blog) {
-                document.getElementById("bg1")?.classList.add("blur-md", "brightness-25");
-                document.getElementById("bg2")?.classList.add("blur-md", "brightness-25");
+            if (document.body.dataset.blog === "true") {
+                const bg1 = document.getElementById("bg1");
+                const bg2 = document.getElementById("bg2");
+                bg1?.classList.add("blur-md", "brightness-25");
+                bg2?.classList.add("blur-md", "brightness-25");
             }
 
             let index = Math.floor(Math.random() * 64) + 1;
