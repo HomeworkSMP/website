@@ -4,9 +4,9 @@ const { frontmatter } = Astro.props;
 const { title, author, date, banner, readingTime = 1 } = frontmatter;
 ---
 
-<RootLayout title={title}>
-    <div class="bg-zinc-600/80 max-w-5xl mx-auto p-8 rounded-xl">
-        <article class="max-w-4xl mx-auto text-neutral-300 space-y-6">
+<RootLayout title={title} blog={true}>
+    <div id="post-wrap" class="bg-neutral-700/95 max-w-5xl mx-auto p-8 rounded-xl">
+        <article id="post-article" class="max-w-4xl mx-auto text-neutral-300 space-y-6">
             {
                 banner && (
                     <div class="w-full h-64 overflow-hidden rounded-lg">
@@ -18,14 +18,23 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
             <header class="space-y-2">
                 <h1 class="text-4xl md:text-5xl font-bold text-lime-400">{title}</h1>
 
-                <div class="flex flex-wrap items-center gap-2 text-neutral-400 text-sm">
+                <div class="flex flex-wrap items-center gap-2 text-neutral-300/75 text-sm">
                     <span>by {author} • {date} • {readingTime} min read</span>
                 </div>
             </header>
 
-            <section class="prose prose-invert max-w-full">
-                <slot />
-            </section>
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <section class="post-content prose prose-invert max-w-full flex-1 order-2 lg:order-1">
+                    <slot />
+                </section>
+
+                <aside id="toc" class="lg:sticky top-16 lg:top-24 z-20 w-full lg:w-64 shrink-0 order-1 lg:order-2 self-start">
+                    <div class="rounded-md p-4 bg-neutral-900/60 border border-neutral-800">
+                        <h3 class="text-sm font-semibold text-neutral-200 mb-2">Contents</h3>
+                        <nav id="toc-list" class="text-sm text-neutral-300"></nav>
+                    </div>
+                </aside>
+            </div>
 
             <div class="mt-8">
                 <a href="/blog" class="text-lime-400 hover:text-lime-300 font-medium">← Back to Blog</a>
@@ -33,3 +42,95 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
         </article>
     </div>
 </RootLayout>
+
+<script>
+    (function () {
+        const slugify = (text = '') => {
+            return String(text)
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const content = document.querySelector('.post-content');
+            const toc = document.getElementById('toc');
+            const tocList = document.getElementById('toc-list');
+            if (!content || !toc || !tocList) return;
+
+            const headings = content.querySelectorAll('h2, h3, h4');
+            const wrap = document.getElementById('post-wrap');
+            const articleEl = document.getElementById('post-article');
+
+            if (!headings.length) {
+                toc.style.display = 'none';
+                if (wrap) {
+                    wrap.classList.remove('max-w-6xl');
+                    wrap.classList.add('max-w-5xl');
+                }
+                if (articleEl) {
+                    articleEl.classList.remove('max-w-5xl');
+                    articleEl.classList.add('max-w-4xl');
+                }
+                return;
+            }
+
+            if (wrap) {
+                wrap.classList.remove('max-w-5xl');
+                wrap.classList.add('max-w-6xl');
+            }
+            if (articleEl) {
+                articleEl.classList.remove('max-w-4xl');
+                articleEl.classList.add('max-w-5xl');
+            }
+
+            const ul = document.createElement('ul');
+            ul.className = 'space-y-1';
+
+            headings.forEach(h => {
+                const text = (h.textContent || '').trim();
+                if (!h.id) h.id = slugify(text || 'heading');
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#' + h.id;
+                a.textContent = text;
+                a.className = 'block hover:text-lime-300';
+                const level = parseInt(h.tagName.substring(1), 10);
+                if (level === 3) a.classList.add('pl-3');
+                if (level === 4) a.classList.add('pl-6');
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+
+            tocList.appendChild(ul);
+
+            tocList.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href') || '';
+                    const id = href.startsWith('#') ? href.slice(1) : href;
+                    const target = id ? document.getElementById(id) : null;
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (href) history.replaceState(null, '', href);
+                });
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target && entry.target.id;
+                    if (!id) return;
+                    const link = tocList.querySelector("a[href='#" + id + "']");
+                    if (!link) return;
+                    if (entry.isIntersecting) {
+                        tocList.querySelectorAll('a').forEach(x => x.classList.remove('text-lime-300', 'font-semibold'));
+                        link.classList.add('text-lime-300', 'font-semibold');
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px' });
+
+            headings.forEach(h => observer.observe(h));
+        });
+    })();
+</script>
