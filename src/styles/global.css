@@ -17,3 +17,7 @@
 li::marker {
     color: white;
 }
+
+table, th, tr, td {
+    border-color: #505050;
+}
