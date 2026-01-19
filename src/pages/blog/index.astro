@@ -3,7 +3,9 @@ import RootLayout from "../../layouts/RootLayout.astro";
 
 const posts = await Astro.glob("./*.mdx");
 
-posts.sort(
+const validPosts = posts.filter((post) => post.frontmatter);
+
+validPosts.sort(
     (a, b) =>
         new Date(b.frontmatter.date).getTime() -
         new Date(a.frontmatter.date).getTime(),
@@ -19,13 +21,58 @@ posts.sort(
                 updates, and stories from our Minecraft SMP community. Our blogs
                 can be written by any of our members.
             </p>
+            <div class="mb-6 flex flex-col lg:flex-row gap-4">
+                <div class="flex-1">
+                    <label class="text-neutral-300 block mb-2">Search posts:</label>
+                    <input type="text" id="searchInput" placeholder="Search by title or author..." class="w-full bg-neutral-700 text-neutral-100 px-3 py-2 rounded border border-neutral-600 hover:border-lime-400 transition" />
+                </div>
+                <div class="mb-6 lg:mb-0">
+                    <label class="text-neutral-300 block mb-2">Filter by tag:</label>
+                    <select id="tagFilter" class="w-full bg-neutral-700 text-neutral-100 px-3 py-2 rounded border border-neutral-600 hover:border-lime-400 transition">
+                        <option value="">All tags</option>
+                        {   
+                            Array.from(new Set(validPosts.flatMap((post) =>
+                                post.frontmatter.tags ? post.frontmatter.tags.split("; ") : [],
+                            ))).sort().map((tag) => (
+                                <option value={tag}>{tag}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <script>
+                const searchInput = document.getElementById("searchInput");
+                const tagFilter = document.getElementById("tagFilter");
+                const postItems = document.querySelectorAll("ul li");
+
+                function filterPosts() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const selectedTag = tagFilter.value;
+
+                    postItems.forEach((item) => {
+                        const title = item.textContent.toLowerCase();
+                        const matchesSearch = title.includes(searchTerm);
+                        const matchesTag = !selectedTag || item.textContent.includes(selectedTag);
+                        item.style.display = matchesSearch && matchesTag ? "block" : "none";
+                    });
+                }
+
+                searchInput.addEventListener("input", filterPosts);
+                tagFilter.addEventListener("change", filterPosts);
+            </script>
 
             <ul class="space-y-4">
                 {
-                    posts.map((post) => (
+                    validPosts.map((post) => (
                         <li class="border border-neutral-800 p-4 rounded hover:border-lime-400 transition bg-neutral-800">
                             <a href={post.url} class="flex justify-between items-center">
-                                <span class="font-semibold text-neutral-100 hover:text-lime-400">{post.frontmatter.title} • {post.frontmatter.author}</span>
+                                <div class="w-fit">
+                                    <span class="font-semibold text-neutral-100 hover:text-lime-400">{post.frontmatter.title} • {post.frontmatter.author}</span>
+                                    {post.frontmatter.tags && post.frontmatter.tags.split("; ").map((tag: string) => (
+                                        <p class="text-xs bg-neutral-700 w-fit rounded px-1 inline-block mr-1">{tag}</p>
+                                    ))}
+                                </div>
                                 <span class="text-neutral-500 text-sm">{post.frontmatter.date}</span>
                             </a>
                         </li>
