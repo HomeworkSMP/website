@@ -35,8 +35,7 @@ const navlinks = [{ name: "Blog", href: "/blog" }];
                     </svg>
                 </button>
 
-                <div id="quicklinks-menu" class="absolute right-0 mt-2 w-40 bg-neutral-900 border border-neutral-700 rounded shadow-xl py-2 hidden"
-                >
+                <div id="quicklinks-menu" class="absolute right-0 mt-2 w-40 bg-neutral-900 border border-neutral-700 rounded shadow-xl py-2 hidden">
                     {
                         quicklinks.map((q) => (
                             <a href={q.href} class="block px-4 py-2 text-neutral-300 hover:bg-neutral-800 hover:text-lime-400" target="_blank">{q.name}</a>

@@ -1,7 +1,7 @@
 ---
 import RootLayout from "./RootLayout.astro";
 const { frontmatter } = Astro.props;
-const { title, author, date, banner, readingTime = 1 } = frontmatter;
+const { title, author, date, banner, readingTime = 0, tags = "" } = frontmatter;
 ---
 
 <RootLayout title={title} blog={true}>
@@ -19,7 +19,7 @@ const { title, author, date, banner, readingTime = 1 } = frontmatter;
                 <h1 class="text-4xl md:text-5xl font-bold text-lime-400">{title}</h1>
 
                 <div class="flex flex-wrap items-center gap-2 text-neutral-300/75 text-sm">
-                    <span>by {author} • {date} • {readingTime} min read</span>
+                    <span>By {author} <br> Posted on {date} <br> {readingTime} min read<br>Tags: {tags}</span>
                 </div>
             </header>
 

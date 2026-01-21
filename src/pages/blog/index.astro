@@ -16,18 +16,18 @@ validPosts.sort(
     <div class="bg-zinc-600/80 max-w-5xl mx-auto p-8 rounded-xl">
         <section class="max-w-4xl mx-auto text-neutral-100">
             <h2 class="text-3xl font-bold mb-2 text-lime-400">HomeworkSMP Blog</h2>
-            <p class="text-neutral-300 mb-4">
+            <p class="text-neutral-300 mb-2">
                 Welcome to the HomeworkSMP blog, where we share the latest news,
                 updates, and stories from our Minecraft SMP community. Our blogs
                 can be written by any of our members.
             </p>
-            <div class="mb-6 flex flex-col lg:flex-row gap-4">
-                <div class="flex-1">
-                    <label class="text-neutral-300 block mb-2">Search posts:</label>
+            <div class="mb-6 flex flex-col md:flex-row md:gap-3 gap-1">
+                <div class="flex-4">
+                    <label class="text-neutral-400 md:block">Search posts:</label>
                     <input type="text" id="searchInput" placeholder="Search by title or author..." class="w-full bg-neutral-700 text-neutral-100 px-3 py-2 rounded border border-neutral-600 hover:border-lime-400 transition" />
                 </div>
-                <div class="mb-6 lg:mb-0">
-                    <label class="text-neutral-300 block mb-2">Filter by tag:</label>
+                <div class="flex-1">
+                    <label class="text-neutral-400 md:block">Filter by tag:</label>
                     <select id="tagFilter" class="w-full bg-neutral-700 text-neutral-100 px-3 py-2 rounded border border-neutral-600 hover:border-lime-400 transition">
                         <option value="">All tags</option>
                         {   
@@ -39,27 +39,44 @@ validPosts.sort(
                         }
                     </select>
                 </div>
+                <div class="flex-1">
+                    <label class="text-neutral-400 md:block">Filter by year:</label>
+                    <select id="yearFilter" class="w-full bg-neutral-700 text-neutral-100 px-3 py-2 rounded border border-neutral-600 hover:border-lime-400 transition">
+                        <option value="">All years</option>
+                        {   
+                            Array.from(new Set(validPosts.flatMap((post) =>
+                                post.frontmatter.date ? post.frontmatter.date.split("-")[0] : [],
+                            ))).sort().reverse().map((date) => (
+                                <option value={date}>{date}</option>
+                            ))
+                        }
+                    </select>
+                </div>
             </div>
 
             <script>
                 const searchInput = document.getElementById("searchInput");
                 const tagFilter = document.getElementById("tagFilter");
+                const yearFilter = document.getElementById("yearFilter");
                 const postItems = document.querySelectorAll("ul li");
 
                 function filterPosts() {
-                    const searchTerm = searchInput.value.toLowerCase();
-                    const selectedTag = tagFilter.value;
+                    const searchTerm = searchInput?.value.toLowerCase();
+                    const selectedTag = tagFilter?.value;
+                    const selectedYear = yearFilter?.value;
 
                     postItems.forEach((item) => {
                         const title = item.textContent.toLowerCase();
+                        const date = item.querySelector("span.text-neutral-500")?.textContent;
                         const matchesSearch = title.includes(searchTerm);
-                        const matchesTag = !selectedTag || item.textContent.includes(selectedTag);
+                        const matchesTag = (!selectedTag || item.textContent.includes(selectedTag)) && (!selectedYear || date?.includes(selectedYear));
                         item.style.display = matchesSearch && matchesTag ? "block" : "none";
                     });
                 }
 
-                searchInput.addEventListener("input", filterPosts);
-                tagFilter.addEventListener("change", filterPosts);
+                searchInput?.addEventListener("input", filterPosts);
+                tagFilter?.addEventListener("change", filterPosts);
+                yearFilter?.addEventListener("change", filterPosts);
             </script>
 
             <ul class="space-y-4">
@@ -67,8 +84,9 @@ validPosts.sort(
                     validPosts.map((post) => (
                         <li class="border border-neutral-800 p-4 rounded hover:border-lime-400 transition bg-neutral-800">
                             <a href={post.url} class="flex justify-between items-center">
-                                <div class="w-fit">
-                                    <span class="font-semibold text-neutral-100 hover:text-lime-400">{post.frontmatter.title} • {post.frontmatter.author}</span>
+                                <div class="md:w-4/5 w-3/5">
+                                    <span class="font-semibold text-neutral-100 hover:text-lime-400 mr-1">{post.frontmatter.title} • {post.frontmatter.author}</span>
+                                    <br>
                                     {post.frontmatter.tags && post.frontmatter.tags.split("; ").map((tag: string) => (
                                         <p class="text-xs bg-neutral-700 w-fit rounded px-1 inline-block mr-1">{tag}</p>
                                     ))}
