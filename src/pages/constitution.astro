@@ -11,8 +11,8 @@ const html = marked.parse(mdText);
 
 <RootLayout title="Constitution">
     <div class="bg-zinc-600/80 max-w-5xl mx-auto p-8 rounded-xl">
-        <p><a href="https://media.homeworksmp.gay/Constitution.pdf" class="text-lime-400 hover:underline">Link to PDF Version</a> | <a href="https://github.com/HomeworkSMP/server/blob/main/CONSTITUTION.md" class="text-lime-400 hover:underline">Link to GitHub Version Controlled Version</a></p>
-        <section class="max-w-5xl mx-auto">
+        <section class="md:max-w-4xl max-w-5xl mx-auto">
+            <p><a href="https://media.homeworksmp.gay/Constitution.pdf" class="text-lime-400 hover:underline">Link to PDF Version</a> | <a href="https://github.com/HomeworkSMP/server/blob/main/CONSTITUTION.md" class="text-lime-400 hover:underline">Link to GitHub Version Controlled Version</a></p>
             <article set:html={html} class="prose prose-invert max-w-full" />
         </section>
     </div>
