@@ -1,0 +1,25 @@
+---
+title: "HomeworkSMP Outage on July 23rd, 2026"
+date: "2026-07-23"
+banner: ""
+layout: "../../layouts/BlogPostLayout.astro"
+readingTime: 2
+author: "waitwhatActo"
+tags: "Incident Report"
+---
+
+On July 23rd, 2026, HomeworkSMP experienced a brief server outage followed by a much longer status indicator outage (all times in this blog will be in PDT).
+
+At 01:34, an alarm was raised regarding the condition of the server due to excessive resource use by other processes; two minutes later, at 01:36, it was escalated to critical. As a precautionary measure, we rebooted the server at 02:20.
+
+Unfortunately, upon reboot the server refused to connect to the internet, which meant that from 02:20 onward, players were unable to connect. We implemented a fix at 02:42, and the server came back online two minutes later at 02:44.
+
+However, being back online didn't solve everything: the Minecraft server itself still couldn't connect to the internet. It made its last attempt to call any API at 02:47, to no avail, so the server remained inaccessible to players even though the underlying host was healthy again.
+
+It wasn't until 11:08 that we identified and corrected this issue with another server reboot, restoring player access by 11:09.
+
+Throughout this entire period of downtime, it's worth noting that the game tick clock never stopped running, meaning any AFK farms continued operating uninterrupted while players were locked out.
+
+I want to take a moment to take responsibility for this outage and apologize for any inconvenience it may have caused our players.
+
+\- Acto
